@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Leckerli+One&family=Monoton&display=swap" rel="stylesheet">
+
+    <title>Hello, world!</title>
+    <style>
+      body, html{
+        background-color:black;
+        height:100%;
+        position: relative;
+        overflow:hidden;
+      }
+
+      .putaran{
+        animation-name: putar;
+        animation-duration: 4s;
+        animation-delay: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        /*animation-direction: alternate;*/
+        transform-style: preserve-3d;
+      }
+      /*.putarmulai:hover {
+        -webkit-animation-play-state: paused;
+        -moz-animation-play-state: paused;
+        animation-play-state: ;
+      }*/
+      .tangangerak {
+        animation-name: tangangerak;
+        animation-duration: 1s;
+        animation-delay: .3s;
+        /*animation-timing-function: linear;*/
+      }
+
+      .tangangerak2 {
+        animation-name: tangangerak2;
+        animation-duration: 1s;
+        animation-delay: 0s;
+      }
+
+      @keyframes tangangerak {
+        0%   { 
+          transform: translate(0px,0px);
+          transition:1s;
+        }
+        50% {
+          transform: translate(0px,-40px);
+          transition:1s;
+        }
+        100% { 
+          transform: translate(0px,0px);
+          transition:1s;
+        }
+      }
+
+      @keyframes tangangerak2 {
+        0%   { 
+          transform: translate(0px,0px);
+          transition:1s;
+        }
+        50% {
+          transform: translate(0px,40px);
+          transition:1s;
+        }
+        100% { 
+          transform: translate(0px,0px);
+          transition:1s;
+        }
+      }
+
+      @keyframes putar {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+      .tiups {
+          animation: tiup .6s infinite alternate;
+          transition:1s;
+      }
+      @keyframes tiup {
+        0%   { 
+          font-size: 15px;
+          transition:.6s;
+         }
+        100% { 
+          transform: scale(1.1);
+          font-size: 16px;
+          transition:.6s;
+        }
+      }
+
+      .putartulis {
+        animation: putartulis 3s infinite alternate;
+          transition:2s;
+      }
+
+      @keyframes putartulis {
+        from {transform: rotateY(0deg);}
+        to {transform: rotateY(360deg);}
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Launch demo modal
+    </button> -->
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Launch static backdrop modal
+    </button> -->
+
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="background-color:black">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ -->
+    <div class="musikplayer" style="width:100px;height:100px;border-radius:50%;position:absolute;background-color:white;top:10px;left:10px;border:1px solid yellow;box-shadow:1px 1px 9px #ddd;z-index:9">
+      <img class="putarmulai" style="border-radius:50%" src="img/team1.jpg" width="100%">
+      <div class="bulattengah" style="position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;width:30px;height:30px;border-radius:50%;background-color:#c2c2c2;">
+        <div class="bulathitam" style="position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;width:10px;height:10px;border-radius:50%;background-color:#353b35;"></div>
+      </div>
+    </div>
+    <div class="stik" style="position:fixed;left:12px;margin-top:110px;width:30px;height:30px;transform:rotate(0deg);transition:1s;z-index:10">
+      <img class="stikok musikset" style="position:absolute;left:28px;right:0;margin:auto;transform:rotate(-90deg);bottom:0;top:-2px" src="img/stik2.png" width="30">
+    </div>
+
+    <audio id="musikvalue" autoplay loop style="width:100%">
+      <source src="music/musik.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="musiktepuk" autoplay style="width:100%">
+      <source src="music/tepuk.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="btn on" style="position:absolute;padding:0;border-radius:50%;background-color:white;width:40px;right:10px;top:10px;box-shadow:3px 3px 5px grey">
+      <img src="img/on.png" width="100%">
+    </button>
+    <button class="btn off" style="position:absolute;padding:0;border-radius:50%;background-color:white;width:40px;right:10px;top:10px;box-shadow:3px 3px 5px grey">
+      <img src="img/off.png" width="100%">
+    </button>
+    <button class="btn tiup tiups" style="position:absolute;padding:5px;right:90px;top:310px;transition:1s;z-index:10;background-color:#03fcf0;border-radius:50%">
+      Tiup
+    </button>
+    <div class="hbd" style="position:absolute;right:0;left:0;margin:120px auto;width:300px">
+      <img class="uc" src="img/hbd.gif" width="100%">
+      <h1 class="text-center text-info putartuli" style="font-family: 'Bungee Shade', cursive;text-shadow:1px 1px 1px black;font-size:40px">JULIETE</h1>
+      <button class="btn open" style="padding:0">
+        <img class="opn" src="img/open.gif" width="50%">
+      </button>
+    </div>
+    <div class="row" style="height:550px ">
+      <img style="position:absolute;right:0;left:0;margin:auto;width:105px" class="kabelmati" src="img/kabelmati.png">
+      <div class="col-12" style="display:flex;justify-content:center;">
+        <img class="kabel" src="img/kabellamp.png" width="80">
+      </div>
+      <div class="col-12" style="display:flex;justify-content:center;margin-top:-8px;">
+        <img class="sinar" src="img/cahaya.png" width="400" height="480">
+      </div>
+      <img style="position:absolute;right:0;left:0;margin:90px auto;width:100%;transition:1s;" class="hati" src="img/hati.gif">
+      <img style="position:absolute;right:0;left:0;margin:140px auto;width:150px;transition:1s;" class="orangkue orang" src="img/orang.png">
+      <!-- <img style="position:absolute;right:20px;left:0;margin:220px auto;width:90px;transition:1s;" class="orangkue kue" src="img/kue.gif"> -->
+      <img style="position:absolute;right:20px;left:0;margin:250px auto;width:90px;transition:1s;" class="orangkue kue" src="img/cake.gif">
+      <img style="position:absolute;right:-20px;margin:390px auto;width:140px;transition:1s;" class="balon" src="img/balon.gif">
+      <img style="position:absolute;left:-10px;margin:402px auto;width:140px;transition:1s;" class="balon" src="img/balon.gif">
+      <img style="position:absolute;left:10px;margin:270px auto;width:140px;transition:1s;" class="terompet" src="img/terompet.gif">
+      <div class="kata2 bg-info" style="position:absolute;right:0;left:0;margin:150px auto;width:240px;height:140px;transition:1s;border-radius:10px;padding:0;opacity:0;">
+        <h4 style="font-family: 'Leckerli One', cursive; position:absolute;right:0;left:0;margin:40px auto;" class="text-center">
+          Terima Kasih <br>
+          Sudah Menemani
+        </h4>
+        <div class="slide1" style="position:absolute;width:240px;height:140px;background-color:green;border-radius:10px;background-image:url('img/galeri/galeri1.jpg');background-size:cover;border:4px solid white;">
+        </div>
+
+        <div class="slide2" style="position:absolute;width:240px;height:140px;background-color:green;border-radius:10px;background-image:url('img/galeri/galeri2.jpg');background-size:cover;border:4px solid white;">
+        </div>
+        <div class="slide3" style="position:absolute;width:240px;height:140px;background-color:green;border-radius:10px;background-image:url('img/galeri/galeri3.jpg');background-size:cover;border:4px solid white;">
+        </div>
+        <div class="slide4" style="position:absolute;width:240px;height:140px;background-color:green;border-radius:10px;background-image:url('img/galeri/galeri4.jpg');background-size:cover;border:4px solid white;">
+        </div>
+        <div class="slide5" style="position:absolute;width:240px;height:140px;background-color:green;border-radius:10px;background-image:url('img/galeri/galeri5.jpg');background-size:cover;border:4px solid white;">
+        </div>
+
+        <div class="slide6 bg-info" style="position:absolute;width:240px;height:140px;border-radius:10px;border:4px solid white;">
+          <h1 class="text-center" style="font-family: 'Leckerli One', cursive;margin-top: 30px">KENANGAN TERINDAH</h1>
+        </div>
+        <div class="slide7 bg-info" style="position:absolute;width:240px;height:140px;border-radius:10px;border:4px solid white;">
+          <h1 class="text-center" style="font-family: 'Leckerli One', cursive;margin-top:10px">Happy Birthday</h1>
+          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit
+          tempor incididunt</p>
+        </div>
+        <img style="position:absolute;right:-23px;margin:20px auto;width:45px;transition:1s;" class="tangankiri" src="img/tangankanan.png">
+        <img style="position:absolute;left:-23px;margin:60px auto;width:45px;transition:1s;" class="tangankanan" src="img/tangankiri.png">
+        <button class="btn text-white prev" data-slidep="slidenol" style="position:absolute;left:5px;bottom:5px;padding:0px 3px 0px 3px;background-color:rgba(0,0,0,.3);width:35px;">&laquo;</button>
+        <button class="btn text-white next" data-sliden="slide3" style="position:absolute;right:5px;bottom:5px;padding:0px 3px 0px 3px;background-color:rgba(0,0,0,.3);width:35px;">&raquo;</button>
+      </div>
+      <div class="garis1" style="height:2px;width:100%;background-color:#363638;margin-top:-52px"></div>
+      <div class="garis1" style="height:4px;width:100%;background-color:#363638"></div>
+    </div>
+    <div class="garis" style="margin-top:-50px;height:100%;background-color:#b84d0b;">
+      <img style="margin:53px auto;position:absolute;left:0;right:0" src="img/pita.png">
+
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FF5500" fill-opacity="1" d="M0,192L80,192C160,192,320,192,480,213.3C640,235,800,277,960,266.7C1120,256,1280,192,1360,160L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg> -->
+    </div>
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+      $('.sinar').hide();
+      $('.kabel').hide();
+      $('.orangkue').hide();
+      $('.tiup').hide();
+      $('.musikplayer').hide();
+      $('.hati').hide();
+      $('.kata2').hide();
+      $('.balon').hide();
+      $('.garis').hide();
+      $('.terompet').hide();
+      $('.stik').hide();
+      // $('.kue').hide();
+      // $(window).on('load',function(){
+      //   // $('#staticBackdrop').modal('show');
+      // });
+
+      $('.prev').hide();
+      var snext=8;
+      $('.next').on('click',function(){
+        snext--;
+        console.log(snext);
+        if(snext==7){
+          $('.slide7').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+        }else if(snext==6){
+          $('.slide6').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+        }else if(snext==5){
+          $('.slide5').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+        }else if(snext==4){
+          $('.slide4').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+        }else if(snext==3){
+          $('.slide3').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+        }else if(snext==2){
+          $('.slide2').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+        }else if(snext==1){
+          $('.slide1').css({
+            'transform':'translate(0px,150px)',
+            'transition':'1s',
+            'opacity':'0'
+          });
+          $('.prev').show();
+          $('.next').hide();
+        }
+        $('.tangankiri').addClass('tangangerak2');
+        setTimeout(function() {
+          $('.tangankiri').removeClass('tangangerak2');
+        }, 1000);
+      });
+      
+      $('.prev').on('click',function(){
+        snext++;
+        console.log(snext);
+        if(snext==2){
+          $('.slide1').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+        }else if(snext==3){
+          $('.slide2').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+        }else if(snext==4){
+          $('.slide3').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+        }else if(snext==5){
+          $('.slide4').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+        }else if(snext==6){
+          $('.slide5').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+        }else if(snext==7){
+          $('.slide6').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+        }else if(snext==8){
+          $('.slide7').css({
+            'transform':'translate(0px,0px)',
+            'transition':'1s',
+            'opacity':'1'
+          });
+          $('.next').show();
+          $('.prev').hide();
+        }
+        
+        $('.tangankanan').addClass('tangangerak');
+        setTimeout(function() {
+          $('.tangankanan').removeClass('tangangerak');
+        }, 1000);
+      });
+
+      // $('.open').on('click',function(){
+      //   $('on').show();
+      // });
+
+      $('.off').hide();
+      $('.on').hide();
+      $('.garis1').hide();
+      $('.open').on('click',function(){
+        $('.garis').show();
+        $('.balon').show();
+        $('.hbd').hide();
+        $('.off').show();
+        $('.on').hide();
+        $('.sinar').show();
+        $('.kabel').show();
+        $('.kabelmati').hide();
+        $('.musikplayer').show();
+        $('.kata2').hide();
+        $('.putarmulai').addClass('putaran');
+        $('body').css('background-color','#18191a');
+        $('.tiup').addClass('tiups');
+        $('.putarmulai').css('animation-play-state','running');
+        setTimeout(function() {
+          $('.sinar').show();
+          // $('.orangkue').show();
+          $('.kabel').show();
+        }, 100);
+        setTimeout(function() {
+          $('.sinar').hide();
+          $('.kabel').hide();
+          // $('.orangkue').hide();
+        }, 150);
+        setTimeout(function() {
+          $('.kabel').show();
+          $('.garis1').show();
+          $('.garis').show();
+          $('.balon').show();
+          $('.sinar').show();
+          $('.orangkue').show();
+        }, 200);
+        setTimeout(function() {
+          $('.kabel').hide();
+          $('.garis1').hide();
+          $('.garis').hide();
+          $('.balon').hide();
+          $('.sinar').hide();
+          $('.orangkue').hide();
+        }, 300);
+        setTimeout(function() {
+          $('.kabel').show();
+          $('.garis1').show();
+          $('.garis').show();
+          $('.balon').show();
+          $('.sinar').show();
+          $('.orangkue').show();
+          $('.orang').css('width','220px');
+          // $('.kue').css({
+          //   'width':'130px',
+          //   'margin':'275px auto'
+          // });
+          $('.kue').css({
+            'width':'160px',
+            'margin':'300px auto'
+          });
+        }, 600);
+        $('.stik').show();
+        $('.stik').css({
+          'transform':'rotate(-35deg)'
+        });
+        setTimeout(function() {
+          $('.tiup').show();
+        }, 1000);
+        var audio = $("#musikvalue")[0];
+        audio.play();
+      });
+
+      $('.off').on('click',function(e){
+        snext=8;
+        console.log(snext);
+        $('.kata2').css({
+          'transform':'translate(0px,50px)',
+          'opacity':'0'
+        });
+        $('.next').show();
+        $('.prev').hide();
+        $('.slide1,.slide2,.slide3,.slide4,.slide5,.slide6,.slide7').css({
+          'opacity':'1',
+          'transform':'translate(0px,0px)'
+        });
+        $('.stik').hide();
+        $('.stik').css({
+          'transform':'rotate(0deg)'
+        });
+        // e.stopPropagation();
+        // e.preventDefault();
+        // snext=4;
+        $('.garis1').hide();
+        $('.garis').hide();
+        $('.balon').hide();
+        $('.hbd').show();
+        $('.on').hide();
+        $('.off').hide();
+        $('.sinar').hide();
+        $('.kabel').hide();
+        $('.kabelmati').show();
+        $('.orangkue').hide();
+        $('.musikplayer').hide();
+        $('.kata2').hide();
+        $('.putarmulai').removeClass('putaran');
+        $('body').css('background-color','black');
+        $('.orang').css('width','150px');
+        $('.kue').css({
+          'width':'90px',
+          'margin':'250px auto'
+        });
+        // setTimeout(function() {
+          $('.kue').hide();
+          $('.kata2').hide();
+        // }, 8000);
+        $('.hati').hide();
+        $('.tiup').hide();
+        setTimeout(function() {
+          $('.tiup').hide();
+        }, 1000);
+        $('.kue').attr('src','img/cake.gif');
+        var audio = $("#musikvalue")[0];
+        var audiotepuk = $("#musiktepuk")[0];
+        audio.pause();
+        audiotepuk.pause();
+      });
+
+      $('.tiup').on('click',function(){
+        setTimeout(function() {
+         $('.kue').attr('src','img/cakemati.png');
+        }, 1300);
+        // $('.tiup').hide();
+        // $('.tiup').removeClass('tiups');
+        $('.tiup').hide();
+        $('.terompet').show();
+        $('.off').hide();
+        $('.orang').attr('src','img/orangkedip.png');
+        setTimeout(function() {
+          $('.terompet').hide();
+        }, 2000);
+        setTimeout(function() {
+          $('.orang').attr('src','img/orang.png');
+          $('.hati').show();
+        }, 1000);
+        setTimeout(function() {
+          $('.hati').hide();
+        }, 6000);
+        setTimeout(function() {
+          // $('.kue').hide();
+          // $('.orang').attr('src','img/orangkata.png');
+          $('.kata2').show();
+          $('.kata2').css({
+            'transform':'translate(0px,135px)',
+            'opacity':'1'
+          });
+          $('.off').show();
+        }, 8000);
+        var audiotepuk = $("#musiktepuk")[0];
+        setTimeout(function() {
+          audiotepuk.play();
+        }, 1000);
+      });
+
+      $('.musikset').on('click',function(){
+          var audio = $("#musikvalue")[0];
+        if (audio.paused) {
+            audio.play();
+            $('.putarmulai').addClass('putaran');
+            $('.putarmulai').css('animation-play-state','running');
+            $('.stik').css({
+              'transform':'rotate(-35deg)'
+            });
+        }  else {
+            audio.pause();
+            // $('.putarmulai').removeClass('putaran');
+            $('.putarmulai').css('animation-play-state','paused');
+            $('.stik').css({
+              'transform':'rotate(0deg)'
+            });
+        }
+      });
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
